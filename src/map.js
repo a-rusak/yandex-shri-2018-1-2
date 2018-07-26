@@ -2,7 +2,7 @@ import { loadList, loadDetails } from './api';
 import { getDetailsContentLayout } from './details';
 import { createFilterControl } from './filter';
 
-export function initMap(ymaps, containerId) {
+export default function initMap(ymaps, containerId) {
   const myMap = new ymaps.Map(containerId, {
     center: [55.76, 37.64],
     controls: [],
@@ -19,7 +19,7 @@ export function initMap(ymaps, containerId) {
     geoObjectBalloonContentLayout: getDetailsContentLayout(ymaps)
   });
 
-  objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+  myMap.geoObjects.add(objectManager);
 
   loadList().then(data => {
     objectManager.add(data);
